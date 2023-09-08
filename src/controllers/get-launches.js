@@ -2,7 +2,7 @@ const { getAllLaunches } = require("../services/spacex-launches");
 const { getFavorites } = require("../repositories/launches-repository");
 
 const getLaunches = async (request, response) => {
-  const userId = request.headers["x-user-id"];
+  const userId = request.headers["x-user-id"] || '1';
   const allLaunches = await getAllLaunches();
   const favoriteLaunches = getFavorites(userId);
 
