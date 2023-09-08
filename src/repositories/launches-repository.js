@@ -13,6 +13,11 @@ const addFavorites = (userId, launches = []) => {
       !userFavorites.launches.some((favoriteLaunch) => favoriteLaunch == launch)
   );
   userFavorites.launches.push(notDuplicatedLaunches);
-}
+};
 
-module.exports = { addFavorites };
+const getFavorites = (userId) => {
+  const favorite = FAVORITES.find((x) => x.userId == userId);
+  return (favorite && favorite.launches) || [];
+};
+
+module.exports = { addFavorites, getFavorites };
