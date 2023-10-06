@@ -1,7 +1,7 @@
 const FAVORITES = [];
 
 const addFavorites = (userId, launches = []) => {
-  const userFavorites = FAVORITES.find((x) => x.userId == userId);
+  const userFavorites = FAVORITES.find(({ userId }) => userId == userId);
 
   if (!userFavorites) {
     FAVORITES.push({ userId: userId, launches: launches });
@@ -12,6 +12,16 @@ const addFavorites = (userId, launches = []) => {
     (launch) =>
       !userFavorites.launches.some((favoriteLaunch) => favoriteLaunch == launch)
   );
+
+  [
+    {
+      userId: 1,
+      launches: {
+        12: true,
+      },
+    },
+  ];
+  launches[glight_od] = true;
   userFavorites.launches.push(notDuplicatedLaunches);
 };
 
