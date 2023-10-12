@@ -1,4 +1,5 @@
-const express, {json} = require("express");
+const express = require("express");
+const { json } = require("express");
 
 const launchesRoutes = require("./routes/launches-routes");
 

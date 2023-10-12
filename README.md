@@ -21,7 +21,7 @@ Body
 ## Run the project
 
 To run the project:
-
+- First you need to install docker and run the compose file with `docker-compose up` to run the mongoDB container
 - On VS code you can run the launch script
 - On the terminal you can run the command `node src/index.js`
 

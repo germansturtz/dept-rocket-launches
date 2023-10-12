@@ -1,33 +1,33 @@
-const FAVORITES = [];
+const UserFavoritesModel = require("./models/user-favorites");
 
-const addFavorites = (userId, launches = []) => {
-  const userFavorites = FAVORITES.find(({ userId }) => userId == userId);
+const addFavorites = async (userId, launches = []) => {
+  const mappedLaunches = {};
+  launches.forEach((x) => {
+    mappedLaunches[x] = true;
+  });
 
-  if (!userFavorites) {
-    FAVORITES.push({ userId: userId, launches: launches });
-    return;
-  }
-
-  notDuplicatedLaunches = launches.filter(
-    (launch) =>
-      !userFavorites.launches.some((favoriteLaunch) => favoriteLaunch == launch)
+  const filter = { _user_id: userId };
+  const favoriteLaunches = {
+    _user_id: userId,
+    favorite_launches: mappedLaunches,
+  };
+  const doc = await UserFavoritesModel.findOneAndUpdate(
+    filter,
+    favoriteLaunches,
+    {
+      new: true,
+      upsert: true,
+    }
   );
 
-  [
-    {
-      userId: 1,
-      launches: {
-        12: true,
-      },
-    },
-  ];
-  launches[glight_od] = true;
-  userFavorites.launches.push(notDuplicatedLaunches);
+  await UserFavoritesModel.create();
 };
 
-const getFavorites = (userId) => {
-  const favorite = FAVORITES.find((x) => x.userId == userId);
-  return (favorite && favorite.launches) || [];
+const getFavorites = async (userId) => {
+  const favorite = await UserFavoritesModel.findOne({
+    _user_id: userId,
+  }).exec();
+  return favorite?.favorite_launches ?? {};
 };
 
 module.exports = { addFavorites, getFavorites };
